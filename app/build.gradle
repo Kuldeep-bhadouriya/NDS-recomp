@@ -6,6 +6,7 @@ plugins {
 android {
   namespace 'com.platinumfast'
   compileSdk 36
+  ndkVersion '26.3.11579264'  // must match CI sdkmanager version in build-apk.yml
 
   defaultConfig {
     applicationId 'com.platinumfast'
@@ -24,7 +25,7 @@ android {
   externalNativeBuild {
     cmake {
       path '../../CMakeLists.txt'
-      version '3.22.1+'
+      version '3.22.1'  // must match CI sdkmanager version in build-apk.yml
     }
   }
 
