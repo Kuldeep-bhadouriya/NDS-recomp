@@ -21,12 +21,19 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
+
+      - name: Accept Android SDK licenses
+        run: yes | sdkmanager --licenses
 
       - name: Install SDK packages
         run: |
-          sdkmanager --install "platform-tools" "platforms;android-36" \
-            "build-tools;36.0.0" "ndk;26.3.11579264" "cmake;3.22.1"
-          yes | sdkmanager --licenses
+          sdkmanager --install \
+            "platforms;android-36" \
+            "build-tools;36.0.0" \
+            "ndk;26.3.11579264" \
+            "cmake;3.22.1"
 
       - name: Install Gradle 8.7
         run: |
