@@ -24,7 +24,7 @@ android {
 
   externalNativeBuild {
     cmake {
-      path '../../CMakeLists.txt'
+      path '../CMakeLists.txt'  // relative to app/ module dir -> repo root
       version '3.22.1'  // must match CI sdkmanager version in build-apk.yml
     }
   }
