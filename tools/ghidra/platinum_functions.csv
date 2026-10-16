@@ -1,0 +1,9 @@
+nitro_name,arm9_addr_hex,status,notes
+OS_ReadFile,0x00000000,unresolved,NitroFS read used by overlay loader; needs Ghidra FNT/FAT xref — no strings in retail ARM9
+MI_DmaCopy32,0x021021A0,candidate-high,"PUSH {r3-r7,lr} @0x21021A0, DMA SAD/DAD via 0x040000B0 base, OS_DisableIrq BL 0x21CDAB8 / Restore BL 0x21CDACC, POP end 0x21021DC"
+MI_DmaFill32,0x021021E0,candidate-medium,"PUSH {r3-r7,lr} @0x21021E0, 2nd DMA variant same irq-guard pattern, POP end 0x2102244; copy-vs-fill needs Ghidra decompile to split"
+GX_SendFifo,0x020B1084,candidate-medium,"PUSH 10-reg + 0xC8 frame @0x20B1084, GX FIFO base 0x04000400 pool cluster x41 (0x20B1064..0x20C49A4), calls 0x20B275C; confirm FIFO drain in Ghidra"
+SND_UpdateStream,0x02383B00,candidate-low,ARM7 SPU init-update cluster PUSH@0x2383B00 SPUCNT writes; mixer needs main-loop xref
+CARD_ReadSector,0x020CD1C0,candidate-medium,"PUSH {r3-r7,lr} @0x20CD1C0, CARD base 0x04100010 pools (0x20CD1B4/508/564), 0x200-sector reads; overlay stutter source"
+AP_OverlayCheck1,0x00000000,unresolved,"lives in overlays (122 total, ov4 300KB/ov5 201KB @0x21D0D80) — needs per-overlay Ghidra import, NEVER nop blind"
+AP_OverlayCheck2,0x00000000,unresolved,same as above — second guard, verify both before patch

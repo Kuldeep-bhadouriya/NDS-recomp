@@ -1,0 +1,13 @@
+# Local / secret / large — never push ROMs, BIOS, SDK paths, or build output.
+local.properties
+*.nds
+*.gba
+*.bin
+*.ptst
+.gradle/
+build/
+app/build/
+captures/
+*.apk
+*.aab
+.DS_Store

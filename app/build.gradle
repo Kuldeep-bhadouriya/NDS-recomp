@@ -1,0 +1,43 @@
+plugins {
+  id 'com.android.application'
+  id 'org.jetbrains.kotlin.android'
+}
+
+android {
+  namespace 'com.platinumfast'
+  compileSdk 36
+
+  defaultConfig {
+    applicationId 'com.platinumfast'
+    minSdk 29
+    targetSdk 36
+    versionCode 1
+    versionName '0.3-shell'
+    ndk { abiFilters 'arm64-v8a' }  // SD678+ is arm64; drop 32-bit for 16KB pages + size
+  }
+
+  buildTypes {
+    debug { applicationIdSuffix '.debug' }
+    release { minifyEnabled false }
+  }
+
+  externalNativeBuild {
+    cmake {
+      path '../../CMakeLists.txt'
+      version '3.22.1+'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+  kotlinOptions { jvmTarget = '17' }
+
+  packaging { jniLibs { useLegacyPackaging = false } }
+}
+
+dependencies {
+  implementation 'androidx.core:core-ktx:1.13.1'
+  implementation 'androidx.appcompat:appcompat:1.7.0'
+}
