@@ -4,9 +4,16 @@
 #include "savestate.h"
 
 static EmulatorCore g_core;
-static std::string g_baseDir = "/data/data/com.platinumfast/files";
+static std::string g_baseDir;  // set via setFilesDir from MainActivity
 
 extern "C" {
+
+JNIEXPORT void JNICALL
+Java_com_platinumfast_CoreBridge_setFilesDir(JNIEnv* env, jobject, jstring jdir) {
+  const char* p = env->GetStringUTFChars(jdir, nullptr);
+  g_baseDir = p;
+  env->ReleaseStringUTFChars(jdir, p);
+}
 
 JNIEXPORT jboolean JNICALL
 Java_com_platinumfast_CoreBridge_loadRom(JNIEnv* env, jobject, jstring jpath) {

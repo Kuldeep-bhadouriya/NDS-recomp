@@ -27,6 +27,7 @@ class MainActivity : Activity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    CoreBridge.setFilesDir(filesDir.absolutePath)
     val layout = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
     status = TextView(this).apply { text = "Pick your Platinum ROM (CPUE)" }
     layout.addView(status)

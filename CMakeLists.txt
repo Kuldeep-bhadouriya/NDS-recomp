@@ -18,5 +18,10 @@ target_include_directories(platinum_core PUBLIC core/include)
 
 if(ANDROID)
   add_library(platinum_jni SHARED app/src/main/cpp/jni_bridge.cpp)
+  # Link PT_LOAD segments at 16KB alignment so the .so loads on
+  # 16KB-page-size devices (Android 15+/new SoCs) without remapping.
+  target_link_options(platinum_jni PRIVATE
+    "-Wl,-z,max-page-size=16384"
+    "-Wl,-z,common-page-size=16384")
   target_link_libraries(platinum_jni platinum_core log)
 endif()

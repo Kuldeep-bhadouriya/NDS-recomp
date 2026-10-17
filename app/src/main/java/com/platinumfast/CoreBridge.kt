@@ -4,6 +4,7 @@ package com.platinumfast
 // ROM/BIOS never bundled — user picks their own CPUE dump via SAF.
 object CoreBridge {
   init { System.loadLibrary("platinum_jni") }
+  external fun setFilesDir(dir: String)  // must be called once before saveState/loadState
   external fun loadRom(path: String): Boolean
   external fun unload()
   external fun setFastForward(mode: Int) // 0,2,4,255
